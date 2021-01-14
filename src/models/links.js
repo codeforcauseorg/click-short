@@ -6,7 +6,7 @@ const linkSchema = new mongoose.Schema({
     type: String,
     trim: true,
     validate(value) {
-      if(!validator.isURL(value)) {
+      if (!validator.isURL(value)) {
         throw new Error('Invalid Url')
       }
     }
