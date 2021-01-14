@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const Link = mongoose.model('Links', {
+const linkSchema = new mongoose.Schema({
   longLink: {
     type: String,
     trim: true,
@@ -14,7 +14,21 @@ const Link = mongoose.model('Links', {
   shortLink: {
     type: String,
     trim: true
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
+  expired_at: {
+    type: Date,
+    required: true
+  },
+  clickCount: {
+    type: Number,
+    default: 0
   }
 })
 
-module.exports = Link
+const link = mongoose.model('Link', linkSchema)
+
+module.exports = link
