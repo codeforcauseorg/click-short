@@ -12,6 +12,8 @@ require('./database/db') // Load mongodb database
 
 var app = express();
 
+require('./firebase')
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

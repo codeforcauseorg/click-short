@@ -196,3 +196,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/macos,vscode,linux,windows,node
 
 docker/mongodb/data
+firebase-credentials.json
