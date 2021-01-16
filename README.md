@@ -3,6 +3,7 @@
 URL shortner || Simplified click redirection and tracking
 
 # Development Setup:
+- Add firebase-credentials.json from firebase console for auth.
 - If you have already mongodb installed on your system, run it.
 - Run mongodb inside docker:
   - cd docker/mongodb
