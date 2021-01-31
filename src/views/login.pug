@@ -46,11 +46,13 @@ html(lang="en")
               method: 'post',
               url: 'auth',
               headers: {
-                'Authorization':  `Bearer ${uToken}`
+                'Authorization':  `Bearer ${uToken}`,
+                'newuser': true
               }
             })
-          })          
-          // ...
+          }).then(()=> {
+              window.location.assign("/")
+          })
         }).catch((error) => {
           // Handle Errors here.
           var errorCode = error.code;

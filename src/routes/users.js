@@ -27,7 +27,11 @@ router.get('/auth', function (req, res, next) {
 })
 
 router.post('/auth', auth, (req, res, next) => {
-  console.log('post auth request is hit')
+  console.log('Authentication is successful')
+})
+
+router.get('/checkAuth', auth, function (req, res) {
+  res.send('User is authenticated! Guys')
 })
 
 module.exports = router
