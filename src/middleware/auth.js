@@ -18,6 +18,8 @@ const auth = (req, res, next) => {
       const { authToken } = req
       const userInfo = await admin.auth().verifyIdToken(authToken)
       req.authId = userInfo.uid
+      if (req.headers.newuser) {
+      }
       return next()
     } catch (e) {
       return res
