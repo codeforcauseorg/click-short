@@ -13,6 +13,9 @@ html(lang="en")
         button#login Sign In With Google
       script.
         window.addEventListener("DOMContentLoaded", () => {
+        /* Original App */
+        
+        /*
         const firebaseConfig = {
         apiKey: "AIzaSyAoZCdA-KxsWQ8hwVpLCoswLYww6fC7mK4",
         authDomain: "click-short-e4d69.firebaseapp.com",
@@ -21,7 +24,21 @@ html(lang="en")
         messagingSenderId: "976251553976",
         appId: "1:976251553976:web:4208c200940e2d0a61cc4d",
         measurementId: "G-TX80B739NJ"                               
+        }; */
+
+        /*Replace below with your App Credentials */
+
+       const firebaseConfig = {
+          apiKey: "AIzaSyCZqrgdMK8ve2atg3sBlhsbUpMx5WNKdgc",
+          authDomain: "my-clickshort.firebaseapp.com",
+          projectId: "my-clickshort",
+          storageBucket: "my-clickshort.appspot.com",
+          messagingSenderId: "269832699088",
+          appId: "1:269832699088:web:b7a019a65ae74d39ad72d5",
+          measurementId: "G-1PXDNQ6CS9"
         };
+
+
         firebase.initializeApp(firebaseConfig);
         document
         .getElementById("login")
