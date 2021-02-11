@@ -1,6 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
 body {
   padding: 0px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  height: 200vh;
+}
+
+.right-ont{
+  display: inline-flex;
+}
+.logoutbtn{
+  color: red;
 }
 
 a {
@@ -20,6 +31,16 @@ a {
 
 .input{
   position: relative;
+}
+
+
+/* Form CSS */
+.inputfield{
+  margin: 8px 0;
+}
+.inputfieldhd{
+  font-weight: bold !important;
+  margin: 8px 0px 14px 0;
 }
 
 .form-group .form-control {
@@ -52,4 +73,10 @@ a {
   }
   .fea {
       stroke-width: 1.8;
+  }
+
+  /* URL TABLE */
+
+  .myurls{
+    border: #3c4858 2px solid;
   }

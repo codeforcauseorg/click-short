@@ -5,15 +5,18 @@ head
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   title Click-Short
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
-  link(rel='stylesheet', href='../../public/stylesheets/style.css')
+  link(rel='stylesheet', href='stylesheets/style.css')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css')
 nav.navbar.navbar-light.bg-light
   a.navbar-brand(href='#')
-    img(src='../../public/logo.svg', width='244px', height='32px', alt='logo')
+    img(src='logo.svg', width='244px', height='32px', alt='logo')
   .right-ont
-    ion-icon(name='person-circle-outline')
-    p Hey
-    a logout
+    ion-icon(name='person-circle-outline', style='width:3em !important; height:2em !important; margin: auto;')
+    p(style='margin:auto;')
+      | Hey 
+      br
+      span.logoutbtn
+        a logout
 .container-fluid.banner(style='background-color: indigo;')
   .bannertext
     h3(style='text-align: center;') URL Shortner
@@ -70,6 +73,35 @@ nav.navbar.navbar-light.bg-light
         // end row
       // end form
       // OLD ONE STARTS
+.container
+  .col-md-12
+    nav.navbar.navbar-expand-lg.navbar-light(style='background-color: #e3f2fd;')
+      #navbarColor03.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+        form.form-inline
+          input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+          button.btn.btn-outline-primary.my-2.my-sm-0(type='submit') Search
+    table.table.myurls
+      thead
+        tr
+          th(scope='col') Clicks
+          th(scope='col') Trimmed URL
+          th(scope='col') Original URL
+          th(scope='col') Created by
+          th(scope='col') Created on
+          th(scope='col') Expiry Date
+          th(scope='col') Status
+          th(scope='col') Actions
+      tbody
+        tr
+          th(scope='row') 1
+          td Mark
+          td Otto
+          td @mdo
+          td @mdo
+          td @mdo
+          td @mdo
+          td @mdo
 script(src='https://unpkg.com/ionicons@5.4.0/dist/ionicons.js')
 script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
