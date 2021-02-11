@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var linkRouter = require('./routes/links')
 var loginRouter = require('./routes/login')
+var homeRouter = require('./routes/home')
 var authmid = require('./middleware/auth')
 
 require('./database/db') // Load mongodb database
@@ -26,9 +27,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static('public'));
 
-app.get('/homepage', (req,res)=>{
-  res.render('home')
-})
 
 app.post('/auth', authmid )
 
@@ -36,6 +34,7 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/link', linkRouter)
 app.use('/login', loginRouter)
+app.use('/home', homeRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
