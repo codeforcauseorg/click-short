@@ -4,6 +4,7 @@ head
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
   title Click-Short
+  link(rel="shortcut icon", href='onlylogo.svg',  width='32px', height='32px')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
   link(rel='stylesheet', href='stylesheets/style.css')
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css')
@@ -27,7 +28,8 @@ nav.navbar.navbar-light.bg-light
       form#contact-form(method='post', name='contact-form')
         input(type='hidden', name='form-name', value='contact-form')
         .row
-          h2(style='text-align: center;') Add URL and Details to Trim Link
+          .col-md-12
+            h2.urlhd Add URL and Details to Trim Link
           .col-md-12
             .form-group
               label
@@ -76,33 +78,119 @@ nav.navbar.navbar-light.bg-light
 .container
   .col-md-12
     nav.navbar.navbar-expand-lg.navbar-light(style='background-color: #e3f2fd;')
-      #navbarColor03.collapse.navbar-collapse
+      #navbarColor03.navbar-collapse
         ul.navbar-nav.mr-auto
         form.form-inline
-          input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+          input.form-control.msearch.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
           button.btn.btn-outline-primary.my-2.my-sm-0(type='submit') Search
-    table.table.myurls
-      thead
-        tr
-          th(scope='col') Clicks
-          th(scope='col') Trimmed URL
-          th(scope='col') Original URL
-          th(scope='col') Created by
-          th(scope='col') Created on
-          th(scope='col') Expiry Date
-          th(scope='col') Status
-          th(scope='col') Actions
-      tbody
-        tr
-          th(scope='row') 1
-          td Mark
-          td Otto
-          td @mdo
-          td @mdo
-          td @mdo
-          td @mdo
-          td @mdo
-script(src='https://unpkg.com/ionicons@5.4.0/dist/ionicons.js')
+    .table-responsive
+      table.table.myurls
+        thead
+          tr
+            th(scope='col') Clicks
+            th(scope='col') Trimmed URL
+            th(scope='col') Original URL
+            th(scope='col') Created by
+            th(scope='col') Created on
+            th(scope='col') Expiry Date
+            th(scope='col') Status
+            th(scope='col') Actions
+        tbody
+          tr
+            th(scope='row') 1
+            td Mark
+            td Otto
+            td @mdo
+            td @mdo
+            td @mdo
+            td @mdo
+            td @mdo
+footer.footer
+  .container-fluid
+    .row
+      .col-lg-3.col-12.mb-0.mb-md-4.pb-0.pb-md-2
+        center
+          a.logo-footer(href='#')
+            img(src='logo.svg', height='24', alt='')
+      // end col
+      .col-lg-3.col-md-4.col-12.mt-4.mt-sm-0.pt-2.pt-sm-0
+        h5.text-dark.footer-head Contact us
+        ul.list-unstyled.footer-list.mt-4
+          .footemail(style='display:inline-flex;')
+            svg.feather.feather-mail.fea.icon-sms.icons(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+              path(d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z')
+              polyline(points='22,6 12,13 2,6')
+            a(style='color:inherit', href='mailto:team@codeforcause.org')
+              h6.emailid team@codeforcause.org
+          li
+            a.text-foot(href='#')
+              i.fa.fa-chevron-right.mr-1
+              |  Terms of use
+          li
+            a.text-foot(href='#')
+              i.fa.fa-chevron-right.mr-1
+              | Privacy policy
+      // end col
+      .col-lg-3.col-md-4.col-12.mt-4.mt-sm-0.pt-2.pt-sm-0
+        h5.text-dark.footer-head Resources
+        ul.list-unstyled.footer-list.mt-4
+          li
+            a.text-foot(href='#')
+              i.fa.fa-chevron-right.mr-1
+              |  Webinars and Bootcamps
+          li
+            a.text-foot(href='#')
+              i.fa.fa-chevron-right.mr-1
+              |  Our Blog
+          li
+            a.text-foot(href='#')
+              i.fa.fa-chevron-right.mr-1
+              |  Courses
+      // end col
+      .col-lg-3.col-md-4.col-12.mt-4.mt-sm-0.pt-2.pt-sm-0
+        h4.text-dark.footer-head Follow us on
+        ul.list-unstyled.social-icon.social.mb-0.mt-4
+          .socials
+            li
+              a.rounded(href='https://www.instagram.com/')
+                svg.feather.feather-instagram.fea.icon-sm.fea-social(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  rect(x='2', y='2', width='20', height='20', rx='5', ry='5')
+                  path(d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z')
+                  line(x1='17.5', y1='6.5', x2='17.51', y2='6.5')
+            a.socialname(href='https://www.instagram.com/')
+              h6.socialname Instagram
+          br
+          .socials
+            li
+              a.rounded(href='https://www.linkedin.com/')
+                svg.feather.feather-linkedin.fea.icon-sm.fea-social(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  path(d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z')
+                  rect(x='2', y='9', width='4', height='12')
+                  circle(cx='4', cy='4', r='2')
+            a.socialname(href='https://www.linkedin.com/')
+              h6.socialname Linkdin
+          br
+          .socials
+            li
+              a.rounded(href='https://www.facebook.com')
+                svg.feather.feather-facebook.fea.icon-sm.fea-social(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  path(d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z')
+            a.socialname(href='https://www.facebook.com')
+              h6.socialname Facebook
+          br
+          .socials
+            li
+              a.rounded(href='https://twitter.com')
+                svg.feather.feather-twitter.fea.icon-sm.fea-social(xmlns='http://www.w3.org/2000/svg', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                  path(d='M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z')
+            a.socialname(href='https://twitter.com')
+              h6.socialname Twitter
+        // end icon
+      // end col
+    // end row
+  // end container
+script(type="module", src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js")
+script(nomodule="", src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js")
 script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
 script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
