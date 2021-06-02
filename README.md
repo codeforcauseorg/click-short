@@ -5,7 +5,11 @@
 URL shortner || Simplified click redirection and tracking
 
 # Development Setup:
+<<<<<<< HEAD
 - Add firebase-credentials.json from firebase console for auth.
+=======
+
+>>>>>>> 68a585abf5fd526bef36c04667d3154678a62097
 - If you have already mongodb installed on your system, run it. OR
 - Run mongodb inside docker:
   - cd docker/mongodb
@@ -20,7 +24,11 @@ Once Mongodb is up:
 # Recommendations:
 
 - Use Postman for checking the api requests
+<<<<<<< HEAD
 - Use Robo3T tool as a mongodb gui
+=======
+- Use Robo3T tool for mongodb gui
+>>>>>>> 68a585abf5fd526bef36c04667d3154678a62097
 
 # Contribution
 
@@ -29,4 +37,8 @@ Once Mongodb is up:
 - run `npm run format`
 - Make a PR
 
+<<<<<<< HEAD
 Thanks for coming here! 
+=======
+Thanks for coming here!
+>>>>>>> 68a585abf5fd526bef36c04667d3154678a62097
