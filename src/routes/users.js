@@ -31,7 +31,7 @@ router.post('/auth', auth, (req, res, next) => {
 })
 
 router.get('/checkAuth', auth, function (req, res) {
-  res.send('User is authenticated! Guys')
+  res.send('User is authenticated!')
 })
 
 module.exports = router
