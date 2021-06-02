@@ -1,4 +1,4 @@
-/*const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 const options = {
   useUnifiedTopology: true,
@@ -12,6 +12,8 @@ const MONGOPORT = '27017'
 const DATABASE = 'links-db'
 
 const url = `mongodb://${HOSTNAME}:${MONGOPORT}/${DATABASE}`
+// Or Replace your url with your cluster link here like shown below:
+// const url = "mongodb+srv://muiz1234:muiz1234@cluster0.gguur.mongodb.net/click-short?retryWrites=true&w=majority";
 
 mongoose
   .connect(url, options)
@@ -22,14 +24,3 @@ mongoose
     console.log('Database connection failed.')
     console.log(err)
   })
-*/
-
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://muiz1234:muiz1234@cluster0.gguur.mongodb.net/click-short?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
