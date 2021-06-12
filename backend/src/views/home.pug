@@ -1,0 +1,109 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title Click-Short
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  link(rel='stylesheet', href='stylesheets/style.css')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css')
+nav.navbar.navbar-light.bg-light
+  a.navbar-brand(href='#')
+    img(src='logo.svg', width='244px', height='32px', alt='logo')
+  .right-ont
+    ion-icon(name='person-circle-outline', style='width:3em !important; height:2em !important; margin: auto;')
+    p(style='margin:auto;')
+      | Hey 
+      br
+      span.logoutbtn
+        a logout
+.container-fluid.banner(style='background-color: indigo;')
+  .bannertext
+    h3(style='text-align: center;') URL Shortner
+    h6(style='text-align: center;') Powered by Code for Cause
+.bootstrap-iso
+  .container
+    .shorten
+      form#contact-form(method='post', name='contact-form')
+        input(type='hidden', name='form-name', value='contact-form')
+        .row
+          h2(style='text-align: center;') Add URL and Details to Trim Link
+          .col-md-12
+            .form-group
+              label
+                | URL to be shortened 
+                span.text-danger
+              .position-relative
+                ion-icon.feather.feather-calender.fea.icon-sm.icons(name='unlink-outline', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                input#urltoshorten.form-control.pl-5(name='URLtoshorten', type='text', placeholder='www.exampleURLtobeshortened.com')
+          // end col
+          .col-md-12
+            .form-group
+              label
+                | Needed resultant URL 
+                span.text-danger
+              .position-relative
+                ion-icon.feather.feather-calender.fea.icon-sm.icons(name='unlink-outline', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                input#shortenedurl.form-control.pl-5(name='shortenedURL', type='text', placeholder='www.neededresultantURL.com')
+          // end col
+          .col-md-12
+            .form-group
+              label
+                | Note 
+                span.text-danger
+              .position-relative
+                ion-icon.feather.feather-calender.fea.icon-sm.icons(name='reader-outline', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                input#note.form-control.pl-5(name='URLnote', type='text', placeholder='Note')
+          // end col
+          .col-md-12
+            .form-group
+              label
+                | Expiry Date 
+                span.text-danger
+              .position-relative
+                ion-icon.feather.feather-calender.fea.icon-sm.icons(name='calendar-outline', width='24', height='24', viewbox='0 0 24 24', fill='none', stroke='currentColor', stroke-width='2', stroke-linecap='round', stroke-linejoin='round')
+                input#date.form-control.pl-5(name='expdate', placeholder='MM/DD/YYY', type='text')
+          // end col
+        // end row
+        .row
+          .col-sm-12.text-center
+            input#submit.submitBnt.btn.btn-danger.btn_color.btn-block(type='submit', name='send', value='Shorten URL')
+            #simple-msg
+          // end col
+        // end row
+      // end form
+      // OLD ONE STARTS
+.container
+  .col-md-12
+    nav.navbar.navbar-expand-lg.navbar-light(style='background-color: #e3f2fd;')
+      #navbarColor03.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+        form.form-inline
+          input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+          button.btn.btn-outline-primary.my-2.my-sm-0(type='submit') Search
+    table.table.myurls
+      thead
+        tr
+          th(scope='col') Clicks
+          th(scope='col') Trimmed URL
+          th(scope='col') Original URL
+          th(scope='col') Created by
+          th(scope='col') Created on
+          th(scope='col') Expiry Date
+          th(scope='col') Status
+          th(scope='col') Actions
+      tbody
+        tr
+          th(scope='row') 1
+          td Mark
+          td Otto
+          td @mdo
+          td @mdo
+          td @mdo
+          td @mdo
+          td @mdo
+script(src='https://unpkg.com/ionicons@5.4.0/dist/ionicons.js')
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js')
