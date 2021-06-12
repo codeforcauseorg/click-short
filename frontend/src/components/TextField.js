@@ -30,7 +30,7 @@ export default function TextField({
   return (
     <Box display="flex" className={classes.root}>
       <Box className={classes.box} style={{
-        background: {background}
+        background
       }}>
       </Box>
       <T

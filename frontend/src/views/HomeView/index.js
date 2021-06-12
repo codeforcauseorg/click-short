@@ -2,16 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import HeroWithOneButton from '../../components/Hero';
 import LinkSection from './LinkSection';
+import UrlList from './UrlList';
 
 function Hero() {
   return (
-    <div style={{textAlign: "center"}}>
+    <div style={{textAlign: "center", padding: "0px 10px"}}>
       <HeroWithOneButton
         title="URLS Shortener"
         subtitle="Powered By Code For Cause"
         backgroundImage="url(/images/hero.png)"
       />
       <LinkSection />
+      <UrlList />
     </div>
   );
 }
