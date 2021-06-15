@@ -4,8 +4,7 @@ import TableComponent from '../../components/TableComponent';
 
 const useStyles = makeStyles(() => ({
   root: {
-    margin: "140px auto",
-    textAlign: "center"
+    padding: "0 10px"
   }
 }))
 
@@ -13,6 +12,8 @@ export default function UrlList() {
   const classes = useStyles();
 
   return (
-    <TableComponent />
+    <div className={classes.root} >
+      <TableComponent />
+    </div>
   )
 }

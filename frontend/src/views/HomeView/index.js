@@ -6,7 +6,7 @@ import UrlList from './UrlList';
 
 function Hero() {
   return (
-    <div style={{ textAlign: "center", padding: "0px 10px" }}>
+    <div style={{ textAlign: "center" }}>
       <HeroWithOneButton
         title="URLS Shortener"
         subtitle="Powered By Code For Cause"

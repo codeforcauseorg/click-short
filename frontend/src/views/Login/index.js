@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import ButtonComponent from '../../components/ButtonComponent';
 import { UserContext } from '../../context/userContext';
 import { signInWithGoogle } from '../../services/authService';
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -37,12 +38,13 @@ const useStyles = makeStyles(() => ({
 
 export default function Login() {
   const classes = useStyles();
-
+  const history = useHistory();
   const { setUser } = useContext(UserContext)
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle().then(result => {
-      setUser(result.user)
+      setUser(result.user);
+      history.push("/");
     }).catch(e => {
       console.log('error', e)
     })
