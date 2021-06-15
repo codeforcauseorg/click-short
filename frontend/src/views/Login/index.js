@@ -1,6 +1,8 @@
-import { Container, makeStyles, Typography } from '@material-ui/core';
-import React from 'react'
+import { makeStyles, Typography } from '@material-ui/core';
+import React, { useContext } from 'react';
 import ButtonComponent from '../../components/ButtonComponent';
+import { UserContext } from '../../context/userContext';
+import { signInWithGoogle } from '../../services/authService';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -36,25 +38,38 @@ const useStyles = makeStyles(() => ({
 export default function Login() {
   const classes = useStyles();
 
+  const { setUser } = useContext(UserContext)
+
+  const handleSignInWithGoogle = () => {
+    signInWithGoogle().then(result => {
+      setUser(result.user)
+    }).catch(e => {
+      console.log('error', e)
+    })
+  }
+
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <Typography variant="h3" className={classes.typography}>
-          Sign In / Sign Up
-        </Typography>
-        <Typography style={{ marginBottom: "40px" }}>
-          Manage your links with ease with codeforcause
-        </Typography>
-        <ButtonComponent title="Sign In with Google"
-          className={classes.btn}
-          fullWidth
-          icon={
-            <img src={"https://image.flaticon.com/icons/png/32/2702/2702602.png"} style={{ marginRight: "16px" }} />
-          } />
-        <Typography variant="caption" style={{ display: "block", marginTop: "40px", fontSize: "10px" }}>
-          By continuing, you agree to Code For Cause Terms of Use & Privacy policy.
-        </Typography>
+    <UserContext.Provider >
+      <div className={classes.root}>
+        <div className={classes.container}>
+          <Typography variant="h3" className={classes.typography}>
+            Sign In / Sign Up
+          </Typography>
+          <Typography style={{ marginBottom: "40px" }}>
+            Manage your links with ease with codeforcause
+          </Typography>
+          <ButtonComponent title="Sign In with Google"
+            className={classes.btn}
+            onClick={handleSignInWithGoogle}
+            fullWidth
+            icon={
+              <img src={"https://image.flaticon.com/icons/png/32/2702/2702602.png"} style={{ marginRight: "16px" }} alt="G-Icon" />
+            } />
+          <Typography variant="caption" style={{ display: "block", marginTop: "40px", fontSize: "10px" }}>
+            By continuing, you agree to Code For Cause Terms of Use & Privacy policy.
+          </Typography>
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 }
