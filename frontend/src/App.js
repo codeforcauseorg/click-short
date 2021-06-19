@@ -4,18 +4,18 @@ import { UserContext } from './context/userContext';
 import { auth } from './services/authService'
 
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("clickShortUser")));
+  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const userItems = JSON.stringify({ displayName: user.displayName, email: user.email, photoURL: user.photoURL, uid: user.uid })
+        const token = await user.getIdToken();
+        const userItems = JSON.stringify({ displayName: user.displayName, photoURL: user.photoURL, uid: user.uid, token: token })
         localStorage.setItem("clickShortUser", userItems);
       }
     });
   }, []);
-
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("clickShortUser")));
-  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
     <UserContext.Provider value={value}>

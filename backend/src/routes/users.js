@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const User = require('../models/User')
-const auth = require('../middleware/auth')
+const { auth } = require('../middleware/auth')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
