@@ -22,13 +22,13 @@ export default function LinkSection() {
 
   const sendData = async () => {
     const token = await auth.currentUser.getIdToken();
-    console.log(token)
-    // axios.post(
-    //   'http://localhost:3001/link',
-    //   { headers: { Authorization: `Bearer ${token}` } },
-    //   data
-    // )
-    //   .then(result => console.log(result)).catch(e => console.log('error', e))
+    console.log('token', token)
+    axios.post(
+      'http://localhost:3001/link/',
+      data,
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+      .then(result => console.log(result)).catch(e => console.log('error', e))
   }
 
   const handleChange = (e) => {
