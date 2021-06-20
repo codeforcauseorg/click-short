@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TextField({
   placeholder,
   background,
+  component = null,
   ...rest
 }) {
   const classes = useStyles();
@@ -33,13 +34,20 @@ export default function TextField({
         background
       }}>
       </Box>
-      <T
-        className={classes.textField}
-        variant="outlined"
-        placeholder={placeholder}
-        fullWidth
-        {...rest}
-      />
+      {
+        !component ? (
+          <T
+            className={classes.textField}
+            variant="outlined"
+            placeholder={placeholder}
+            fullWidth
+            {...rest}
+          />
+        ) : (
+          component
+        )
+      }
+
     </Box>
   )
 }
