@@ -30,7 +30,7 @@ export default function LinkSection() {
 
   const sendData = async () => {
     const token = await auth.currentUser.getIdToken();
-    data.expired_at = selectedDate
+    data.expired_at = selectedDate;
     axios.post(
       'http://localhost:3001/link/',
       data,

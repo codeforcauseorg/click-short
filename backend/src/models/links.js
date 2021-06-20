@@ -39,15 +39,15 @@ const linkSchema = new mongoose.Schema({
   }
 )
 
-// linkSchema.statics.isShortLinkAlreadyTaken() = async function (shortLink) {
-//   const link = await this.findOne({shortLink}) ; 
-//   return !!link;
-// }
+linkSchema.statics.isShortLinkAlreadyTaken = async function (shortLink) {
+  const link = await this.findOne({ shortLink }).lean();
+  return !!link;
+}
 
-// linkSchema.statics.isLongLinkAlreadyShortened = async function(longLink, userId) {
-//   const link = await this.findOne({longLink, _id: userId})
-//   return !!link
-// }
+linkSchema.statics.isLongLinkAlreadyShortened = async function (longLink, userId) {
+  const link = await this.findOne({ longLink, owner: userId }).lean();
+  return !!link
+}
 
 const link = mongoose.model('Link', linkSchema)
 

@@ -8,16 +8,25 @@ router.get('/', auth, async function (req, res, next) {
 })
 
 router.post('/', auth, (req, res) => {
-  const link = new Links(req.body)
+  try {
+    const link = new Links(req.body);
+    const { shortLink, longLink, owner } = req.body;
 
-  link
-    .save()
-    .then(() => {
-      res.send(link)
-    })
-    .catch((e) => {
-      res.status(400).send(e.message)
-    })
+    if (Links.isShortLinkAlreadyTaken(shortLink) || Links.isLongLinkAlreadyShortened(longLink, owner)) {
+      res.status(400).send({ message: "The shortened link is already taken OR The link is already Shortened" })
+    }
+
+    link
+      .save()
+      .then(() => {
+        res.send(link)
+      })
+      .catch((e) => {
+        res.status(400).send(e.message)
+      })
+  } catch (e) {
+    res.status(400).send(e);
+  }
 })
 
 router.get("/all-links", adminAuth, async (req, res) => {
