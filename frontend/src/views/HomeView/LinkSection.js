@@ -1,12 +1,13 @@
-import { makeStyles, Typography, Container } from '@material-ui/core';
-import React, { useContext, useState } from 'react'
-import TextField from '../../components/TextField';
-import ButtonComponent from '../../components/ButtonComponent';
-import { UserContext } from '../../context/userContext';
 import DateFnsUtils from '@date-io/date-fns';
-import axios from '../../utils'
-import { auth } from '../../services/authService'
-import { KeyboardDateTimePicker, MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import { Container, makeStyles, Typography } from '@material-ui/core';
+import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import React, { useContext, useState } from 'react';
+import ButtonComponent from '../../components/ButtonComponent';
+import { addRows } from '../../components/TableComponent';
+import TextField from '../../components/TextField';
+import { LinkContext } from '../../context';
+import { auth } from '../../services/authService';
+import axios from '../../utils';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,19 +25,21 @@ const useStyles = makeStyles(() => ({
 export default function LinkSection() {
   const classes = useStyles();
   const [data, setData] = useState(null);
+  const { rows, setRows } = useContext(LinkContext);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const sendData = async () => {
     const token = await auth.currentUser.getIdToken();
-    console.log(selectedDate)
     data.expired_at = selectedDate
-    console.log('token', token)
     axios.post(
       'http://localhost:3001/link/',
       data,
       { headers: { Authorization: `Bearer ${token}` } },
     )
-      .then(result => console.log(result)).catch(e => console.log('error', e))
+      .then(result => {
+        const resultData = result.data;
+        setRows([...rows, (addRows([resultData])[0])]);
+      }).catch(e => console.log('error', e))
   }
 
   const handleChange = (e) => {
@@ -56,7 +59,7 @@ export default function LinkSection() {
         Add URL and Details to Trim Link
       </Typography>
       <TextField background="url('/images/svg1.svg')" placeholder="www.exampleURLtobeshortened.com" onChange={handleChange} name="longLink" />
-      <TextField background="url('/images/svg1.svg')" placeholder="any valid string" onChange={handleChange} name="shortLink" />
+      <TextField background="url('/images/svg1.svg')" placeholder="any valid string (No spaces Allowed)" onChange={handleChange} name="shortLink" />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <TextField background="url('/images/svg1.svg')"
           component={<KeyboardDateTimePicker

@@ -1,7 +1,7 @@
 import { makeStyles, Typography } from '@material-ui/core';
 import React, { useContext } from 'react';
 import ButtonComponent from '../../components/ButtonComponent';
-import { UserContext } from '../../context/userContext';
+import { UserContext } from '../../context';
 import { signInWithGoogle } from '../../services/authService';
 import { useHistory } from "react-router-dom"
 

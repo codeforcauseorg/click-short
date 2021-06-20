@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { CircularProgress, TextField } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { TextField, CircularProgress } from '@material-ui/core';
-import axios from '../utils'
-import { auth } from '../services/authService'
+import React, { useContext, useEffect } from 'react';
+import { LinkContext } from '../context';
+import { auth } from '../services/authService';
+import axios from '../utils';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -34,17 +35,10 @@ function createData(clicks, trimmed, original, created_by, created_on, exp_on, s
   return { clicks, trimmed, original, created_by, created_on, exp_on, status, actions };
 }
 
-const rows = [
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-  createData(445, 'https://codecau.se/contest', 'https://codecau.se/contest', 'Anuj Garg', '23/11/20', '23/11/20', 'Active', 'action'),
-];
+function convertDate(dt) {
+  let date = new Date(dt);
+  return date.getDate() + "/" + (date.getMonth() + 1) + "/" + (date.getFullYear() % 2000);
+}
 
 const useStyles = makeStyles({
   table: {
@@ -52,35 +46,36 @@ const useStyles = makeStyles({
   },
 });
 
+export function addRows(result) {
+  const r = []
+  const { displayName } = JSON.parse(localStorage.getItem("clickShortUser"))
+  result.map((link) => {
+    let { clickCount, shortLink, longLink, createdAt, expired_at } = link;
+    createdAt = convertDate(createdAt);
+    expired_at = convertDate(expired_at);
+    return r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, 'Active', 'action'))
+  })
+
+  return r;
+}
+
 export default function TableComponent() {
   const classes = useStyles();
-  const [data, setData] = useState(null);
+  const { rows, setRows } = useContext(LinkContext);
 
   useEffect(async () => {
-    setTimeout(() => {
-      console.log("hi");
-    }, 2000);
     const token = await auth.currentUser.getIdToken();
     axios.get('http://localhost:3001/link',
       { headers: { Authorization: `Bearer ${token}` } },
     ).then(result => {
-      console.log(result);
-
-      const { displayName } = JSON.parse(localStorage.getItem("clickShortUser"))
-      const r = []
-      result.data.map((link) => {
-        const { clickCount, shortLink, longLink, createdAt, expired_at } = link;
-        r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, 'Active', 'action'))
-      })
-      console.log("datasets", r)
-      setData(r);
+      setRows(addRows(result.data));
     }).catch(e => {
       console.log(e)
     })
-  }, [])
+  }, [setRows])
 
-  if (data === null) {
-    <CircularProgress />
+  if (rows === null) {
+    return <CircularProgress />
   }
 
   return (
@@ -92,9 +87,9 @@ export default function TableComponent() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Clicks</StyledTableCell>
-            <StyledTableCell align="right">Trimmed URL</StyledTableCell>
-            <StyledTableCell align="right">Orignal URL</StyledTableCell>
-            <StyledTableCell align="right">Created by</StyledTableCell>
+            <StyledTableCell>Trimmed URL</StyledTableCell>
+            <StyledTableCell>Orignal URL</StyledTableCell>
+            <StyledTableCell>Created by</StyledTableCell>
             <StyledTableCell align="right">Created On</StyledTableCell>
             <StyledTableCell align="right">Exp. Date</StyledTableCell>
             <StyledTableCell align="right">Status</StyledTableCell>
@@ -107,9 +102,9 @@ export default function TableComponent() {
               <StyledTableCell component="th" scope="row">
                 {row.clicks}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.trimmed}</StyledTableCell>
-              <StyledTableCell align="right">{row.original}</StyledTableCell>
-              <StyledTableCell align="right">{row.created_by}</StyledTableCell>
+              <StyledTableCell>{row.trimmed}</StyledTableCell>
+              <StyledTableCell>{row.original}</StyledTableCell>
+              <StyledTableCell>{row.created_by}</StyledTableCell>
               <StyledTableCell align="right">{row.created_on}</StyledTableCell>
               <StyledTableCell align="right">{row.exp_on}</StyledTableCell>
               <StyledTableCell align="right">{row.status}</StyledTableCell>

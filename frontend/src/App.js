@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import Routes from './Routes';
-import { UserContext } from './context/userContext';
+import { UserContext } from './context';
 import { auth } from './services/authService'
 
 function App() {
