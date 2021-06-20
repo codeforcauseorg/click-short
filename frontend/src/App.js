@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react'
 import Routes from './Routes';
 import { UserContext } from './context';
 import { auth } from './services/authService'
+import { SnackbarProvider } from 'notistack';
 
 function App() {
   const [user, setUser] = useState();
@@ -19,7 +20,9 @@ function App() {
 
   return (
     <UserContext.Provider value={value}>
-      <Routes />
+      <SnackbarProvider maxSnack={3}>
+        <Routes />
+      </SnackbarProvider>
     </UserContext.Provider>
   )
 }

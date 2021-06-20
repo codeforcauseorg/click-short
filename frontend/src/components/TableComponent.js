@@ -11,6 +11,7 @@ import React, { useContext, useEffect } from 'react';
 import { LinkContext } from '../context';
 import { auth } from '../services/authService';
 import axios from '../utils';
+import { useSnackbar } from 'notistack';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -62,6 +63,7 @@ export function addRows(result) {
 export default function TableComponent() {
   const classes = useStyles();
   const { rows, setRows } = useContext(LinkContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(async () => {
     const token = await auth.currentUser.getIdToken();
@@ -70,8 +72,10 @@ export default function TableComponent() {
     ).then(result => {
       setRows(addRows(result.data));
     }).catch(e => {
-      console.log(e)
-    })
+      enqueueSnackbar("Error Fetching your Links, Please try again later", {
+        variant: "error"
+      })
+        })
   }, [setRows])
 
   if (rows === null) {

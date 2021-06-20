@@ -8,6 +8,7 @@ import TextField from '../../components/TextField';
 import { LinkContext } from '../../context';
 import { auth } from '../../services/authService';
 import axios from '../../utils';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,6 +28,7 @@ export default function LinkSection() {
   const [data, setData] = useState(null);
   const { rows, setRows } = useContext(LinkContext);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const { enqueueSnackbar } = useSnackbar();
 
   const sendData = async () => {
     const token = await auth.currentUser.getIdToken();
@@ -39,7 +41,15 @@ export default function LinkSection() {
       .then(result => {
         const resultData = result.data;
         setRows([...rows, (addRows([resultData])[0])]);
-      }).catch(e => console.log('error', e))
+        enqueueSnackbar("The Link is successfully shortened 🥳", { variant: "success" })
+        console.log("re", result.status, typeof (result.status))
+      }).catch((e) => {
+        if (e.response.data.message) {
+          enqueueSnackbar(e.response.data.message, { variant: "error" })
+        } else {
+          enqueueSnackbar(e.response.data.statusText)
+        }
+      })
   }
 
   const handleChange = (e) => {
