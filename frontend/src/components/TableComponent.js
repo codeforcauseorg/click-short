@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import {TextField} from '@material-ui/core';
+import { TextField, CircularProgress } from '@material-ui/core';
+import axios from '../utils'
+import { auth } from '../services/authService'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -51,11 +54,39 @@ const useStyles = makeStyles({
 
 export default function TableComponent() {
   const classes = useStyles();
+  const [data, setData] = useState(null);
+
+  useEffect(async () => {
+    setTimeout(() => {
+      console.log("hi");
+    }, 2000);
+    const token = await auth.currentUser.getIdToken();
+    axios.get('http://localhost:3001/link',
+      { headers: { Authorization: `Bearer ${token}` } },
+    ).then(result => {
+      console.log(result);
+
+      const { displayName } = JSON.parse(localStorage.getItem("clickShortUser"))
+      const r = []
+      result.data.map((link) => {
+        const { clickCount, shortLink, longLink, createdAt, expired_at } = link;
+        r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, 'Active', 'action'))
+      })
+      console.log("datasets", r)
+      setData(r);
+    }).catch(e => {
+      console.log(e)
+    })
+  }, [])
+
+  if (data === null) {
+    <CircularProgress />
+  }
 
   return (
-    <TableContainer component={Paper} style={{marginBottom: "100px"}}>
-      <TableHead style={{backgroundColor: "#EBEBEB", width: '100%', display: "inline-block", textAlign: "right" }} >
-        <TextField variant="outlined" style={{marginRight: "40px", padding: "8px"}} placeholder="search from 100 links"  />
+    <TableContainer component={Paper} style={{ marginBottom: "100px" }}>
+      <TableHead style={{ backgroundColor: "#EBEBEB", width: '100%', display: "inline-block", textAlign: "right" }} >
+        <TextField variant="outlined" style={{ marginRight: "40px", padding: "8px" }} placeholder="search from 100 links" />
       </TableHead>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>

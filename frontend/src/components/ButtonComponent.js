@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ButtonComponent({ className, title, icon, ...rest }) {
+function ButtonComponent({ className, title, icon='', ...rest }) {
   const classes = useStyles();
   return (
     <Button className={clsx(classes.btn, className)} {...rest}>

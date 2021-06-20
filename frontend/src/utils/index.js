@@ -1,3 +1,5 @@
 import axios from 'axios'
 
-export default axios;
+const instance = axios.create();
+
+export default instance;

@@ -14,7 +14,6 @@ const auth = (req, res, next) => {
   getAuthToken(req, res, async () => {
     try {
       const { authToken } = req
-      console.log(authToken)
       const userInfo = await admin.auth().verifyIdToken(authToken)
       req.body.owner = userInfo.uid
       return next()

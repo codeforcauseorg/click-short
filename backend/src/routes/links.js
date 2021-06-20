@@ -8,7 +8,6 @@ router.get('/', auth, async function (req, res, next) {
 })
 
 router.post('/', auth, (req, res) => {
-  console.log('Body', req.body)
   const link = new Links(req.body)
 
   link

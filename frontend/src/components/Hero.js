@@ -67,7 +67,6 @@ function Hero({
             </div>
           </Container>
         </div>
-      )
     </div>
   );
 }
