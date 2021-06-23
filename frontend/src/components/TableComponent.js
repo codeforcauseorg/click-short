@@ -21,7 +21,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
   body: {
     fontSize: 14,
-  },
+  }
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
@@ -45,6 +45,10 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  link: {
+    textDecoration: 'none',
+    color: "#030"
+  }
 });
 
 export function addRows(result) {
@@ -52,9 +56,16 @@ export function addRows(result) {
   const { displayName } = JSON.parse(localStorage.getItem("clickShortUser"))
   result.map((link) => {
     let { clickCount, shortLink, longLink, createdAt, expired_at } = link;
+
+    let status = "Active";
+    if (new Date() > new Date(expired_at)) {
+      status = "Expired";
+    }
+
     createdAt = convertDate(createdAt);
     expired_at = convertDate(expired_at);
-    return r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, 'Active', 'action'))
+
+    return r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, status,))
   })
 
   return r;
@@ -75,7 +86,7 @@ export default function TableComponent() {
       enqueueSnackbar("Error Fetching your Links, Please try again later", {
         variant: "error"
       })
-        })
+    })
   }, [setRows])
 
   if (rows === null) {
@@ -106,8 +117,8 @@ export default function TableComponent() {
               <StyledTableCell component="th" scope="row">
                 {row.clicks}
               </StyledTableCell>
-              <StyledTableCell>{row.trimmed}</StyledTableCell>
-              <StyledTableCell>{row.original}</StyledTableCell>
+              <StyledTableCell><Link link={`http://localhost:3001/${row.trimmed}`} /></StyledTableCell>
+              <StyledTableCell><Link link={row.original} /></StyledTableCell>
               <StyledTableCell>{row.created_by}</StyledTableCell>
               <StyledTableCell align="right">{row.created_on}</StyledTableCell>
               <StyledTableCell align="right">{row.exp_on}</StyledTableCell>
@@ -119,4 +130,17 @@ export default function TableComponent() {
       </Table>
     </TableContainer>
   );
+}
+
+function Link({ link }) {
+  const classes = useStyles();
+
+  return (
+    <a
+      href={link}
+      target="_blank"
+      className={classes.link}>
+      {link}
+    </a>
+  )
 }

@@ -7,12 +7,21 @@ router.get('/:shortLink', async function (req, res, next) {
     const shortLink = await Links.findOne({ shortLink: req.params.shortLink })
 
     if (shortLink) {
-      shortLink.clickCount++;
-      shortLink.save();
-      res.redirect(shortLink.longLink)
+      const expiryDate = new Date(shortLink.expired_at);
+      const currentDate = new Date();
+
+      if (currentDate < expiryDate) {
+        shortLink.clickCount++;
+        shortLink.save();
+        res.redirect(shortLink.longLink);
+      } else {
+        res.redirect("http://localhost:3000/notFound")
+      }
+
     } else {
-      res.send("short link doesn't exist")
+      res.redirect("http://localhost:3000/notFound")
     }
+
   } catch (e) {
     res.status(400).send(e)
   }

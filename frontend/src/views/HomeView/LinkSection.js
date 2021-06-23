@@ -41,8 +41,7 @@ export default function LinkSection() {
       .then(result => {
         const resultData = result.data;
         setRows([...rows, (addRows([resultData])[0])]);
-        enqueueSnackbar("The Link is successfully shortened 🥳", { variant: "success" })
-        console.log("re", result.status, typeof (result.status))
+        enqueueSnackbar("The Link is successfully shortened 🥳", { variant: "success" })        
       }).catch((e) => {
         if (e.response.data.message) {
           enqueueSnackbar(e.response.data.message, { variant: "error" })
