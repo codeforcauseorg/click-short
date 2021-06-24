@@ -37,6 +37,7 @@ export default function TextField({
       {
         !component ? (
           <T
+            required
             className={classes.textField}
             variant="outlined"
             placeholder={placeholder}

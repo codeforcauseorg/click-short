@@ -12,6 +12,7 @@ import { LinkContext } from '../context';
 import { auth } from '../services/authService';
 import axios from '../utils';
 import { useSnackbar } from 'notistack';
+import EditLink from './EditLink'
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -32,8 +33,8 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(clicks, trimmed, original, created_by, created_on, exp_on, status, actions) {
-  return { clicks, trimmed, original, created_by, created_on, exp_on, status, actions };
+function createData(id, clicks, shortLink, longLink, created_by, created_on, expired_at, status, expiryDateInJsForm) {
+  return { id, clicks, shortLink, longLink, created_by, created_on, expired_at, status, expiryDateInJsForm };
 }
 
 function convertDate(dt) {
@@ -55,17 +56,14 @@ export function addRows(result) {
   const r = []
   const { displayName } = JSON.parse(localStorage.getItem("clickShortUser"))
   result.map((link) => {
-    let { clickCount, shortLink, longLink, createdAt, expired_at } = link;
+    let { _id, clickCount, shortLink, longLink, createdAt, expired_at } = link;
 
     let status = "Active";
     if (new Date() > new Date(expired_at)) {
       status = "Expired";
     }
 
-    createdAt = convertDate(createdAt);
-    expired_at = convertDate(expired_at);
-
-    return r.push(createData(clickCount, shortLink, longLink, displayName, createdAt, expired_at, status,))
+    return r.push(createData(_id, clickCount, shortLink, longLink, displayName, createdAt, expired_at, status,))
   })
 
   return r;
@@ -87,7 +85,7 @@ export default function TableComponent() {
         variant: "error"
       })
     })
-  }, [setRows])
+  }, [setRows, enqueueSnackbar])
 
   if (rows === null) {
     return <CircularProgress />
@@ -113,17 +111,17 @@ export default function TableComponent() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.clicks}
               </StyledTableCell>
-              <StyledTableCell><Link link={`http://localhost:3001/${row.trimmed}`} /></StyledTableCell>
-              <StyledTableCell><Link link={row.original} /></StyledTableCell>
+              <StyledTableCell><Link link={`http://localhost:3001/${row.shortLink}`} /></StyledTableCell>
+              <StyledTableCell><Link link={row.longLink} /></StyledTableCell>
               <StyledTableCell>{row.created_by}</StyledTableCell>
-              <StyledTableCell align="right">{row.created_on}</StyledTableCell>
-              <StyledTableCell align="right">{row.exp_on}</StyledTableCell>
+              <StyledTableCell align="right">{convertDate(row.created_on)}</StyledTableCell>
+              <StyledTableCell align="right">{convertDate(row.expired_at)}</StyledTableCell>
               <StyledTableCell align="right">{row.status}</StyledTableCell>
-              <StyledTableCell align="right">{row.actions}</StyledTableCell>
+              <StyledTableCell align="right"><EditLink rowData={row} /></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

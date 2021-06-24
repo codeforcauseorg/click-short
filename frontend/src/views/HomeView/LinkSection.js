@@ -30,7 +30,8 @@ export default function LinkSection() {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const { enqueueSnackbar } = useSnackbar();
 
-  const sendData = async () => {
+  const sendData = async (e) => {
+    e.preventDefault();
     const token = await auth.currentUser.getIdToken();
     data.expired_at = selectedDate;
     axios.post(
@@ -41,7 +42,7 @@ export default function LinkSection() {
       .then(result => {
         const resultData = result.data;
         setRows([...rows, (addRows([resultData])[0])]);
-        enqueueSnackbar("The Link is successfully shortened 🥳", { variant: "success" })        
+        enqueueSnackbar("The Link is successfully shortened 🥳", { variant: "success" })
       }).catch((e) => {
         if (e.response.data.message) {
           enqueueSnackbar(e.response.data.message, { variant: "error" })
@@ -67,27 +68,28 @@ export default function LinkSection() {
       <Typography variant="h3" style={{ fontWeight: 600, marginBottom: 40 }} align="center" >
         Add URL and Details to Trim Link
       </Typography>
-      <TextField background="url('/images/svg1.svg')" placeholder="www.exampleURLtobeshortened.com" onChange={handleChange} name="longLink" />
-      <TextField background="url('/images/svg1.svg')" placeholder="any valid string (No spaces Allowed)" onChange={handleChange} name="shortLink" />
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <TextField background="url('/images/svg1.svg')"
-          component={<KeyboardDateTimePicker
-            disablePast
-            fullWidth
-            inputVariant="outlined"
-            id="date-picker-dialog"
-            format="dd/MM/yyyy  HH:MM a"
-            value={selectedDate}
-            onChange={handleDateChange}
-            className={classes.dateField}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-          />}
-        />
-      </MuiPickersUtilsProvider>
-      <ButtonComponent title="Shorten URL" fullWidth onClick={sendData} />
-
+      <form onSubmit={sendData} >
+        <TextField background="url('/images/svg1.svg')" placeholder="www.exampleURLtobeshortened.com" onChange={handleChange} name="longLink" />
+        <TextField background="url('/images/svg1.svg')" placeholder="any valid string (No spaces Allowed)" onChange={handleChange} name="shortLink" />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <TextField background="url('/images/svg1.svg')"
+            component={<KeyboardDateTimePicker
+              disablePast
+              fullWidth
+              inputVariant="outlined"
+              id="date-picker-dialog"
+              format="dd/MM/yyyy  HH:MM a"
+              value={selectedDate}
+              onChange={handleDateChange}
+              className={classes.dateField}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />}
+          />
+        </MuiPickersUtilsProvider>
+        <ButtonComponent title="Shorten URL" fullWidth type="submit" />
+      </form>
     </Container>
   )
 }
