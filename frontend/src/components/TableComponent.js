@@ -74,15 +74,16 @@ export default function TableComponent() {
   const { rows, setRows } = useContext(LinkContext);
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(async () => {
-    const token = await auth.currentUser.getIdToken();
-    axios.get('http://localhost:3001/link',
-      { headers: { Authorization: `Bearer ${token}` } },
-    ).then(result => {
-      setRows(addRows(result.data));
-    }).catch(e => {
-      enqueueSnackbar("Error Fetching your Links, Please try again later", {
-        variant: "error"
+  useEffect(() => {
+    auth.currentUser.getIdToken().then((token) => {
+      axios.get('http://localhost:3001/link',
+        { headers: { Authorization: `Bearer ${token}` } },
+      ).then(result => {
+        setRows(addRows(result.data));
+      }).catch(e => {
+        enqueueSnackbar("Error Fetching your Links, Please try again later", {
+          variant: "error"
+        })
       })
     })
   }, [setRows, enqueueSnackbar])
@@ -137,6 +138,7 @@ function Link({ link }) {
     <a
       href={link}
       target="_blank"
+      rel="noreferrer"
       className={classes.link}>
       {link}
     </a>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Edit, Delete } from '@material-ui/icons'
-import { Dialog, DialogTitle, TextField, makeStyles, CircularProgress } from '@material-ui/core'
+import { Dialog, DialogTitle, TextField, makeStyles, CircularProgress, DialogContent, DialogContentText, Button, DialogActions } from '@material-ui/core'
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ButtonComponent from './ButtonComponent';
 import DateFnsUtils from '@date-io/date-fns';
@@ -33,6 +33,7 @@ export default function EditAction({ rowData }) {
   const classes = useStyles();
   // rowData.expired_at = new Date(rowData.expiryDateInJsForm)
   const [open, setOpen] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [data, setData] = useState(rowData);
   const [selectedDate, setSelectedDate] = React.useState(new Date(rowData.expired_at));
   const [loading, setLoading] = useState(false);
@@ -44,7 +45,11 @@ export default function EditAction({ rowData }) {
   }
 
   const handleClose = () => {
-    setOpen(false);
+    if (open) {
+      setOpen(false);
+    } else {
+      setOpenDeleteDialog(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -57,6 +62,27 @@ export default function EditAction({ rowData }) {
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+
+  const handleDelete = () => {
+    setOpenDeleteDialog(true);
+  }
+
+  const handleDeleteOperation = async () => {
+    const token = await auth.currentUser.getIdToken();
+    try {
+      await axios.delete(`http://localhost:3001/link/${rowData.id}`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      )
+      enqueueSnackbar("Link deleted!", { variant: "success" });
+      let newArr = [...rows]
+      newArr = newArr.filter((obj => obj.id !== rowData.id))
+      setRows(newArr)
+    } catch (e) {
+      enqueueSnackbar("Error Deleting Your Link!", { variant: "error" })
+    }
+    setOpenDeleteDialog(false);
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,7 +104,7 @@ export default function EditAction({ rowData }) {
       )
       enqueueSnackbar("Link updated!", { variant: "success" });
       let newArr = [...rows]
-      const idx = newArr.findIndex((obj => obj.id == rowData.id))
+      const idx = newArr.findIndex((obj => obj.id === rowData.id))
       newArr[idx] = data;
       setRows(newArr)
     } catch (e) {
@@ -99,8 +125,7 @@ export default function EditAction({ rowData }) {
   return (
     <>
       <Edit onClick={handleClick} style={{ cursor: 'pointer', marginRight: '4px' }} />
-      
-
+      <Delete onClick={handleDelete} style={{ cursor: 'pointer' }} />
       <Dialog
         className={classes.dialog}
         fullWidth
@@ -147,6 +172,22 @@ export default function EditAction({ rowData }) {
             <ButtonComponent title="Update URL" fullWidth type="submit" />
           </MuiPickersUtilsProvider>
         </form>
+      </Dialog>
+      <Dialog open={openDeleteDialog} onClose={handleClose}>
+        <DialogTitle id="alert-dialog-title">{"Delete this Link?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure You want to delete: {rowData.longLink}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteOperation} style={{ color: "#A60000" }}>
+            Delete
+          </Button>
+        </DialogActions>
       </Dialog>
     </>
   )
