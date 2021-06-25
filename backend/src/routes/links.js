@@ -46,6 +46,20 @@ router.put('/:id', auth, async (req, res) => {
   }
 })
 
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deleted = await Links.deleteOne({ _id: id });
+    if (deleted) {
+      res.send(200).send({ message: "Link deleted!" });
+    } else {
+      res.status(400).send({ message: "Unable to delete link" });
+    }
+  } catch (e) {
+    res.status(400).send({ message: "Unable to delete link" });
+  }
+})
+
 router.get("/all-links", adminAuth, async (req, res) => {
   if (req.email === "abhimait1909@gmail.com") {
     res.send(await Links.find().lean())
