@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Edit } from '@material-ui/icons'
+import { Edit, Delete } from '@material-ui/icons'
 import { Dialog, DialogTitle, TextField, makeStyles, CircularProgress } from '@material-ui/core'
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import ButtonComponent from './ButtonComponent';
@@ -80,9 +80,13 @@ export default function EditAction({ rowData }) {
       let newArr = [...rows]
       const idx = newArr.findIndex((obj => obj.id == rowData.id))
       newArr[idx] = data;
-      setRows(newArr)      
+      setRows(newArr)
     } catch (e) {
-      enqueueSnackbar("Error Updating Your Link!", { variant: "error" })
+      if (e.response.data.message) {
+        enqueueSnackbar(e.response.data.message, { variant: "error" })
+      } else {
+        enqueueSnackbar("Error Updating Your Link!", { variant: "error" })
+      }
     }
     setOpen(false)
     setLoading(false)
@@ -94,7 +98,9 @@ export default function EditAction({ rowData }) {
 
   return (
     <>
-      <Edit onClick={handleClick} style={{ cursor: 'pointer' }} />
+      <Edit onClick={handleClick} style={{ cursor: 'pointer', marginRight: '4px' }} />
+      
+
       <Dialog
         className={classes.dialog}
         fullWidth
@@ -103,9 +109,9 @@ export default function EditAction({ rowData }) {
         onClose={handleClose}
       >
         <DialogTitle>
-          Click-short update link Wizard
+          Update Link
         </DialogTitle>
-        <form onSubmit={handleSubmit} style={{ margin: "40px" }} >
+        <form onSubmit={handleSubmit} style={{ margin: "0px 40px 40px" }} >
           <TextField
             className={classes.texField}
             required
