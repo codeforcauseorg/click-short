@@ -34,13 +34,13 @@ router.put('/:id', auth, async (req, res) => {
     if (req.body.shortLink && await Links.isShortLinkAlreadyTaken(req.body.shortLink)) {
       res.status(400).send({ message: `Unable to update!! The short link named: ${req.body.shortLink} is already taken` })
     }
-
-    if (req.body.longLink && await Links.isLongLinkAlreadyShortened(req.body.longLink, req.body.owner)) {
+    else if (req.body.longLink && await Links.isLongLinkAlreadyShortened(req.body.longLink, req.body.owner)) {
       res.status(400).send({ message: "Unable to update!! The Long link is already shortened!" })
     }
-
-    const updatedValue = await Links.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
-    res.send(updatedValue)
+    else {
+      const updatedValue = await Links.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
+      res.send(updatedValue)
+    }
   } catch (e) {
     res.status(400).send(e)
   }

@@ -108,6 +108,7 @@ export default function EditAction({ rowData }) {
       newArr[idx] = data;
       setRows(newArr)
     } catch (e) {
+      setData(rowData);
       if (e.response.data.message) {
         enqueueSnackbar(e.response.data.message, { variant: "error" })
       } else {

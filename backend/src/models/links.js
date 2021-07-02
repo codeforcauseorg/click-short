@@ -49,6 +49,10 @@ linkSchema.statics.isLongLinkAlreadyShortened = async function (longLink, userId
   return !!link
 }
 
+linkSchema.pre('save', async function() {
+  
+})
+
 const link = mongoose.model('Link', linkSchema)
 
 module.exports = link
