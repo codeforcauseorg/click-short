@@ -18,6 +18,7 @@ function HomeView() {
   const handleLogout = () => {
     logout();
     setUser(null);
+    console.log(user)
   }
 
   if (user === null) {
