@@ -6,7 +6,7 @@ import { createBrowserHistory } from "history";
 import Page404 from "./components/Page404";
 import NavBar from "./components/NavBar";
 import AuthGuard from "./components/Guards/AuthGuard";
-
+import Footer from "./components/Footer";
 const history = createBrowserHistory();
 
 const routeRender = () => {
@@ -17,6 +17,7 @@ const routeRender = () => {
           <AuthGuard>
             <NavBar />
             <HomeView />
+            <Footer/>
           </AuthGuard>
         </Route>
         <Route path="/login" exact>

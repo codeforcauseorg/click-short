@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import { Typography , Box } from "@material-ui/core";
+import { Typography, IconButton } from "@material-ui/core";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import Avatar from "@material-ui/core/Avatar";
 import { UserContext } from "../context";
 import { Link as RouterLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logout } from "../services/authService";
-
+import ButtonComponent from "../components/ButtonComponent";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -21,24 +23,24 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "15px",
     fontSize: "12px",
     fontWeight: "600",
+    paddingTop: "15px",
   },
   items: {
     flexGrow: 1,
     display: "flex",
     justifyContent: "flex-end",
-    marginRight: theme.spacing(2),
-    marginTop: theme.spacing(1),
+
+    paddingRight: "50px",
   },
   appBar: {
     backgroundColor: "#fff",
   },
   logo: {
-    marginLeft: theme.spacing(6),
+    paddingLeft: "50px",
   },
   logOut: {
     color: "rgb(166, 0, 0)",
     cursor: "pointer",
-    whiteSpace: "nowrap",
     fontSize: "10px",
     fontWeight: "600",
   },
@@ -51,10 +53,19 @@ export default function NavBar() {
     logout();
     setUser(null);
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0} className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <RouterLink to="/">
             <img
@@ -64,14 +75,32 @@ export default function NavBar() {
             ></img>
           </RouterLink>
           <div className={classes.items}>
-            <Avatar alt={user.displayName} src={user.photoURL} />
-            <Typography  className={classes.title}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleClick}
+              color="inherit"
+            >
+              <Avatar alt={user.displayName} src={user.photoURL} />
+            </IconButton>
+
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                {" "}
+                <ButtonComponent title="Log Out" onClick={handleLogout} />
+              </MenuItem>
+            </Menu>
+
+            <Typography className={classes.title}>
               Hey {user.displayName}!<br></br>
-              <Typography
-                variant="button"
-                className={classes.logOut}
-                onClick={handleLogout}
-              >
+              <Typography className={classes.logOut} onClick={handleLogout}>
                 LogOut!
               </Typography>
             </Typography>
