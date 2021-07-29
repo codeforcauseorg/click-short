@@ -1,5 +1,4 @@
 import React from "react";
-import EmailIcon from "@material-ui/icons/Email";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import {
@@ -13,7 +12,6 @@ import Logo from "../components/Logo";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import FacebookIcon from "@material-ui/icons/Facebook";
@@ -92,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontWeight: "bold",
     fontSize: "16px",
-    lineHeight: "20px"
+    lineHeight: "20px",
   },
   title: {
     color: "#000",
@@ -120,197 +118,201 @@ function Footer({ className, ...rest }) {
 
   return (
     <>
-    <div className={clsx(classes.root, className)}>
-      <Container style={{ maxWidth: "none" }}>
-        <Grid
-          container
-          component="dl"
-          style={{ justifyContent: "space-between" }}
-        >
-          <Grid className={classes.extraMarginTop}>
-            <Logo className={classes.logo} />
-          </Grid>
-          <Grid className={classes.extraMarginTop}>
-            <Typography variant="h4" gutterBottom className={classes.heading}>
-              Contact us
-            </Typography>
-            <Grid className={classes.extraMargin}>
-              <List style={flexColumn}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="mailto:team@codeforcause.org"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>team@codeforcause.org</Typography>
-                </ListItem>
-              </List>
-              <List style={flexColumn}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://codeforcause.org/terms"
-                >
-                  <Typography className={classes.title}>Terms Of Use</Typography>
-                </ListItem>
-              </List>
-              <List style={flexColumn}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://codeforcause.org/privacy"
-                >
-                <Typography className={classes.title}>Privacy Policy</Typography>
-                  
-                </ListItem>
-              </List>
-            </Grid>
-          </Grid>
-          <Grid className={classes.extraMarginTop}>
-            <Typography variant="h4" gutterBottom className={classes.heading}>
-              Resources
-            </Typography>
-            <Grid className={classes.extraMargin}>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="/"
-                  target="_blank"
-                >
-                   <Typography className={classes.title}>Webinar and BootCamp</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://medium.com/code-for-cause"
-                  target="_blank"
-                >
-                  <Typography className={classes.title}>Our Blog</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://codeforcause.org/courses"
-                  target="_blank"
-                >
-                  <Typography className={classes.title}>Courses</Typography>
-                </ListItem>
-              </List>
-            </Grid>
-          </Grid>
-
-          <Grid className={classes.extraMarginTop}>
-            <Typography variant="h4" gutterBottom className={classes.heading}>
-              Follow us on
-            </Typography>
-            <Grid className={classes.extraMargin}>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://www.instagram.com/codeforcause/"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <InstagramIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Instagram</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://www.linkedin.com/company/codeforcauseorg/"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <LinkedInIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Linkedin</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://www.facebook.com/codeforcauseorg"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <FacebookIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Facebook</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://twitter.com/codeforcauseIn"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <TwitterIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Twitter</Typography>
-                </ListItem>
-              </List>
-
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://t.me/codeforcausechat"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <TelegramIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Telegram</Typography>
-                </ListItem>
-              </List>
-              <List style={flexContainer}>
-                <ListItem
-                  className={classes.centerCls}
-                  component="a"
-                  href="https://www.youtube.com/channel/UCfv8cds8AfIM3UZtAWOz6Gg"
-                  target="_blank"
-                >
-                  <ListItemIcon className={classes.iconSocialMedia}>
-                    <YouTubeIcon />
-                  </ListItemIcon>
-                  <Typography className={classes.title}>Youtube</Typography>
-                </ListItem>
-              </List>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
-      </div>
-      
-      <Grid className={classes.copyRightPadding}>
-          <Typography
-            display="block"
-            variant="body2"
-            color="textSecondary"
-            className={classes.copyRightTitle}
+      <div className={clsx(classes.root, className)}>
+        <Container style={{ maxWidth: "none" }}>
+          <Grid
+            container
+            component="dl"
+            style={{ justifyContent: "space-between" }}
           >
-            {"Copyright © "}
-            {new Date().getFullYear()}{" "}
-            <Link color="inherit" href="https://codeforcause.org">
-              Code For Cause Pvt. Ltd.
-            </Link>
-            {" . All rights reserved."}
-          </Typography>
-        </Grid>
+            <Grid className={classes.extraMarginTop}>
+              <Logo className={classes.logo} />
+            </Grid>
+            <Grid className={classes.extraMarginTop}>
+              <Typography variant="h4" gutterBottom className={classes.heading}>
+                Contact us
+              </Typography>
+              <Grid className={classes.extraMargin}>
+                <List style={flexColumn}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="mailto:team@codeforcause.org"
+                  >
+                    <Typography className={classes.title}>
+                      team@codeforcause.org
+                    </Typography>
+                  </ListItem>
+                </List>
+                <List style={flexColumn}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://codeforcause.org/terms"
+                  >
+                    <Typography className={classes.title}>
+                      Terms Of Use
+                    </Typography>
+                  </ListItem>
+                </List>
+                <List style={flexColumn}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://codeforcause.org/privacy"
+                  >
+                    <Typography className={classes.title}>
+                      Privacy Policy
+                    </Typography>
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
+            <Grid className={classes.extraMarginTop}>
+              <Typography variant="h4" gutterBottom className={classes.heading}>
+                Resources
+              </Typography>
+              <Grid className={classes.extraMargin}>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="/"
+                    target="_blank"
+                  >
+                    <Typography className={classes.title}>
+                      Webinar and BootCamp
+                    </Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://medium.com/code-for-cause"
+                    target="_blank"
+                  >
+                    <Typography className={classes.title}>Our Blog</Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://codeforcause.org/courses"
+                    target="_blank"
+                  >
+                    <Typography className={classes.title}>Courses</Typography>
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
+
+            <Grid className={classes.extraMarginTop}>
+              <Typography variant="h4" gutterBottom className={classes.heading}>
+                Follow us on
+              </Typography>
+              <Grid className={classes.extraMargin}>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://www.instagram.com/codeforcause/"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <InstagramIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Instagram</Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://www.linkedin.com/company/codeforcauseorg/"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <LinkedInIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Linkedin</Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://www.facebook.com/codeforcauseorg"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <FacebookIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Facebook</Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://twitter.com/codeforcauseIn"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <TwitterIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Twitter</Typography>
+                  </ListItem>
+                </List>
+
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://t.me/codeforcausechat"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <TelegramIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Telegram</Typography>
+                  </ListItem>
+                </List>
+                <List style={flexContainer}>
+                  <ListItem
+                    className={classes.centerCls}
+                    component="a"
+                    href="https://www.youtube.com/channel/UCfv8cds8AfIM3UZtAWOz6Gg"
+                    target="_blank"
+                  >
+                    <ListItemIcon className={classes.iconSocialMedia}>
+                      <YouTubeIcon />
+                    </ListItemIcon>
+                    <Typography className={classes.title}>Youtube</Typography>
+                  </ListItem>
+                </List>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+
+      <Grid className={classes.copyRightPadding}>
+        <Typography
+          display="block"
+          variant="body2"
+          color="textSecondary"
+          className={classes.copyRightTitle}
+        >
+          {"Copyright © "}
+          {new Date().getFullYear()}{" "}
+          <Link color="inherit" href="https://codeforcause.org">
+            Code For Cause Pvt. Ltd.
+          </Link>
+          {" . All rights reserved."}
+        </Typography>
+      </Grid>
     </>
   );
 }
